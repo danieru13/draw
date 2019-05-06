@@ -38,7 +38,7 @@ function init() {
         const line = data.line;
         context.beginPath();
         context.lineWidth = 2;
-        context.strokeStyle = color;
+        context.strokeStyle = line[2];
         context.moveTo(line[0].x * width, line[0].y * height);
         context.lineTo(line[1].x * width, line[1].y * height);
         context.stroke();
@@ -46,7 +46,7 @@ function init() {
 
     function mainLoop(){
         if(mouse.click && mouse.move && mouse.prev_pos){
-            socket.emit('draw_line', {line: [mouse.pos, mouse.prev_pos]});
+            socket.emit('draw_line', {line: [mouse.pos, mouse.prev_pos, color]});
             mouse.move = false;
         }
         mouse.prev_pos = {x: mouse.pos.x, y: mouse.pos.y};
